@@ -15,7 +15,7 @@ class DataPoint {
 
   Map<String, dynamic> toJson() {
     return {
-      "timestamp": timestamp,
+      "timestamp": timestamp.toString(),
       "amount": amount,
     };
   }

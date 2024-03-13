@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../domain/DataPoint.dart';
 
 class FirebaseService {
-  String path = "https://fl-charts-example-default-rtdb.firebaseio.com";
+  String path = "https://fl-charts-example-default-rtdb.firebaseio.com/data";
 
   postDataPoint(DataPoint dataPoint) async {
     var url = Uri.parse("$path.json");
@@ -29,9 +29,8 @@ class FirebaseService {
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonMap = json.decode(response.body);
         jsonMap.forEach((key, value) {
-          //TODO: could be fucked.
           DateTime timestamp = DateTime.parse(value["timestamp"]);
-          int amount = int.parse(value["amount"]);
+          int amount = value["amount"];
           DataPoint dataPoint = DataPoint(timestamp: timestamp, amount: amount);
           dataPointMap[key] = dataPoint;
         });
